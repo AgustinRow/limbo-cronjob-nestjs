@@ -1,12 +1,12 @@
 import { Injectable, Logger } from '@nestjs/common';
-import { execFileSync } from 'child_process';
+import { ChildProcess, spawn } from 'child_process';
 
 @Injectable()
 export class AppService {
   private readonly logger = new Logger(AppService.name);
-  executeShell(): string {
+  executeShell(): ChildProcess {
     this.logger.debug('Executing file:');
-    const output = execFileSync('./src/date.sh', []);
-    return output.toString();
+    const process = spawn('date', []);
+    return process;
   }
 }
